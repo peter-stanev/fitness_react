@@ -21,11 +21,6 @@ class App extends React.Component {
       <View style={styles.container}>
 
         <Welcome />
-
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
       </View>
     );
   }
@@ -37,12 +32,7 @@ let styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  }
 });
 
-AppRegistry.registerComponent('Application', () => App);
+AppRegistry.registerComponent('HealthApp', () => App);
