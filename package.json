@@ -1,14 +1,13 @@
 {
-  "name": "ReactNativeFluxBoilerplate",
+  "name": "Health",
   "version": "0.0.1",
-  "description": "React native boilerplate with Flux, React native webpack and hot reload",
+  "description": "Health App",
   "keywords": [
     "react native",
     "flux",
     "webpack",
     "hot reload"
   ],
-  "homepage": "https://github.com/OssamaZ/react-native-flux-boilerplate",
   "private": true,
   "scripts": {
     "start": "./node_modules/.bin/react-native-webpack-server start",

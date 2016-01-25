@@ -12,7 +12,7 @@ var {
   View,
 } = React;
 
-var Application = React.createClass({
+var App = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
@@ -49,4 +49,4 @@ var styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('Application', () => Application);
+AppRegistry.registerComponent('HealthApp', () => App);
