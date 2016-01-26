@@ -1,6 +1,5 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * Health React Native App
  */
  
 'use strict';
@@ -35,17 +34,18 @@ class NavButton extends React.Component {
 
 var NavigationBarRouteMapper = {
   LeftButton: function(route, navigator, index, navState) {
-    if (index === 0) {
-      return null;
-    }
+    // if (index === 0) {
+    //   return null;
+    // }
 
-    var previousRoute = navState.routeStack[index-1];
+    // var previousRoute = navState.routeStack[index-1];
+    
     return (
       <TouchableOpacity
         onPress={()=> navigator.pop()}
         style={styles.navBarLeftButton}>
-        <Text style={[styles.navBarText, styles.navBarButtonText]}>
-          {previousRoute.title}
+        <Text style={[styles.navBarText, styles.navBarButtonText]}>          
+          {route.leftTitle}
         </Text>
       </TouchableOpacity>
     );
@@ -57,7 +57,7 @@ var NavigationBarRouteMapper = {
         onPress={()=> navigator.push(newRandomRoute())}
         style={styles.navBarRightButton}>
         <Text style={[styles.navBarText, styles.navBarButtonText]}>
-          Next
+          {route.rightTitle}
         </Text>
       </TouchableOpacity>
     );
@@ -66,9 +66,23 @@ var NavigationBarRouteMapper = {
   Title: function(route, navigator, index, navState) {
     return (
       <Text style={[styles.navBarText, styles.navBarTitleText]}>
-        {route.title} [{index}]
+        {route.title}
       </Text>
     );
+  }
+};
+
+
+// collects all route functions
+var RouteManager = {
+
+  // profile route
+  profileRoute: function() {
+    return {
+      title: 'Me',
+      rightTitle: 'GO PREMIUM',
+      leftTitle: 'Location'
+    }
   }
 };
 
@@ -107,30 +121,32 @@ class App extends React.Component {
   }
 
   render() {
+    // <NavButton
+            //   onPress={() => {
+            //     navigator.immediatelyResetRouteStack([
+            //       newRandomRoute(),
+            //       newRandomRoute(),
+            //       newRandomRoute(),
+            //     ]);
+            //   }}
+            //   text="Reset w/ 3 scenes"
+            // >
+            // </NavButton>
+            // <NavButton
+            //   onPress={() => {
+            //     this.props.navigator.pop();
+            //   }}
+            //   text="Exit NavigationBar Example"
+            // />
     return (
       <Navigator
         debugOverlay={false}
         style={styles.appContainer}
-        initialRoute={newRandomRoute()}
+        initialRoute={RouteManager.profileRoute()}
         renderScene={(route, navigator) => (
           <ScrollView style={styles.scene}>
             <Text style={styles.messageText}>{route.content}</Text>
-            <NavButton
-              onPress={() => {
-                navigator.immediatelyResetRouteStack([
-                  newRandomRoute(),
-                  newRandomRoute(),
-                  newRandomRoute(),
-                ]);
-              }}
-              text="Reset w/ 3 scenes"
-            />
-            <NavButton
-              onPress={() => {
-                this.props.navigator.pop();
-              }}
-              text="Exit NavigationBar Example"
-            />
+            
           </ScrollView>
         )}
         navigationBar={
