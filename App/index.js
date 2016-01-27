@@ -1,11 +1,14 @@
 /**
- * Health React Native App
+ * Sample React Native App
+ * https://github.com/facebook/react-native
  */
  
 'use strict';
 
 import React from 'react-native';
 import Welcome from './components/Welcome';
+import Tabbar, { Tab, RawContent, IconWithBar, glypyMapMaker } from 'react-native-tabbar';
+
 
 let {
   AppRegistry,
@@ -18,6 +21,12 @@ let {
   TouchableHighlight,
 } = React;
 
+// let {
+//   Tab,
+//   RawContent,
+//   IconWithBar,
+//   glypyMapMaker
+// } = Tabbar;
 
 class NavButton extends React.Component {
   render() {
@@ -31,6 +40,14 @@ class NavButton extends React.Component {
     );
   }
 }
+
+let glypy = glypyMapMaker({
+  Home: 'e900',
+  Camera: 'e901',
+  Stat: 'e902',
+  Settings: 'e903',
+  Favorite: 'e904',
+});
 
 var NavigationBarRouteMapper = {
   LeftButton: function(route, navigator, index, navState) {
@@ -95,7 +112,21 @@ function newRandomRoute() {
 
 class App extends React.Component {
 
-   componentWillMount() {
+  constructor(props, context) {
+    super(props, context);
+    this.toggle = false;
+  }
+
+  componentDidMount() {
+
+  }
+
+  tabbarToggle() {
+    this.refs['myTabbar'].getBarRef().show(this.toggle);
+    this.toggle = !this.toggle;
+  }
+
+  componentWillMount() {
     var navigator = this.props.navigator;
 
     var callback = (event) => {
@@ -138,23 +169,67 @@ class App extends React.Component {
             //   }}
             //   text="Exit NavigationBar Example"
             // />
-    return (
-      <Navigator
-        debugOverlay={false}
-        style={styles.appContainer}
-        initialRoute={RouteManager.profileRoute()}
-        renderScene={(route, navigator) => (
-          <ScrollView style={styles.scene}>
-            <Text style={styles.messageText}>{route.content}</Text>
+      //        <Navigator
+      //   debugOverlay={false}
+      //   style={styles.appContainer}
+      //   initialRoute={RouteManager.profileRoute()}
+      //   renderScene={(route, navigator) => (
+      //     <ScrollView style={styles.scene}>
+      //       <Text style={styles.messageText}>{route.content}</Text>
             
-          </ScrollView>
-        )}
-        navigationBar={
-          <Navigator.NavigationBar
-            routeMapper={NavigationBarRouteMapper}
-            style={styles.navBar}/>
-        }
-      />
+      //     </ScrollView>
+      //   )}
+      //   navigationBar={
+      //     <Navigator.NavigationBar
+      //       routeMapper={NavigationBarRouteMapper}
+      //       style={styles.navBar}/>}
+      // >
+      // </Navigator>
+    return (
+
+      <Tabbar ref="myTabbar" barColor={'gray'}>
+        <Tab name="home">
+          <IconWithBar label="Me" />
+          <RawContent>
+            <View style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', justifyContent:'center' }}>
+              <Text onPress={()=>this.tabbarToggle()}>Toggle Tabbar</Text>
+            </View>
+          </RawContent>
+        </Tab>
+        <Tab name="camera">
+          <IconWithBar label="Friends" />
+          <RawContent>
+            <View style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', justifyContent:'center' }}>
+              <Text onPress={()=>console.log('camera')}>Camera</Text>
+            </View>
+          </RawContent>
+        </Tab>
+        <Tab name="stats">
+          <IconWithBar label="Add" />
+          <RawContent>
+            <View style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', justifyContent:'center' }}>
+              <Text onPress={()=>console.log('stats')}>Stats</Text>
+            </View>
+          </RawContent>
+        </Tab>
+        <Tab name="favorite">
+          <IconWithBar label="Challenges" />
+          <RawContent>
+            <View style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', justifyContent:'center' }}>
+              <Text onPress={()=>console.log('favorite')}>Favorite</Text>
+            </View>
+          </RawContent>
+        </Tab>
+        <Tab name="settings">
+          <IconWithBar label="More"/>
+          <RawContent>
+            <View style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', justifyContent:'center' }}>
+              <Text onPress={()=>console.log('settings')}>Settings</Text>
+            </View>
+          </RawContent>
+        </Tab>
+      </Tabbar>
+      
     );
   }
 };
