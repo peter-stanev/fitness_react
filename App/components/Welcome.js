@@ -1,5 +1,6 @@
 /**
  * Welcome Message Component
+ * We can define each Component - screen under this folder
  */
 
 'use strict';

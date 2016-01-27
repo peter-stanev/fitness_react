@@ -1,5 +1,6 @@
 /*
  * AppStore
+ * We can define stores under this folder
  */
 
 'use strict';
@@ -15,6 +16,9 @@ let _state = {
   message: 'Welcome to React Native'
 };
 
+/**
+* App-level Store
+**/
 
 let AppStore = _.assign({}, EventEmitter.prototype, {
 
