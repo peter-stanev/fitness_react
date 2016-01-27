@@ -191,8 +191,29 @@ class App extends React.Component {
         <Tab name="home">
           <IconWithBar label="Me" />
           <RawContent>
-            <View style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', justifyContent:'center' }}>
+            
+            <View style={{ flex: 1,alignItems: 'center', justifyContent:'center' }}>
+              
               <Text onPress={()=>this.tabbarToggle()}>Toggle Tabbar</Text>
+
+              <NavButton
+              onPress={() => {
+                navigator.immediatelyResetRouteStack([
+                  newRandomRoute(),
+                  newRandomRoute(),
+                  newRandomRoute(),
+                ]);
+              }}
+              text="Reset w/ 3 scenes"
+            >
+            </NavButton>
+            <NavButton
+              onPress={() => {
+                this.props.navigator.pop();
+              }}
+              text="Exit NavigationBar Example"/>
+             
+
             </View>
           </RawContent>
         </Tab>
